@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Agri-Chain Swing App",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Agri_100"
+        }
+    ]
+}

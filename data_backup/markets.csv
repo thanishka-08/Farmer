@@ -1,0 +1,9 @@
+M01-TOM,Green Market,MARKET1,tomato,600,600
+M01-RIC,Green Market,MARKET1,rice,800,800
+M01-ONI,Green Market,MARKET1,onion,400,400
+M02-TOM,City Market,MARKET2,tomato,300,300
+M02-CAR,City Market,MARKET2,carrot,400,400
+M02-RIC,City Market,MARKET2,rice,500,500
+M03-ONI,Farmers Market,MARKET3,onion,500,500
+M03-WHE,Farmers Market,MARKET3,wheat,700,700
+M03-CAR,Farmers Market,MARKET3,carrot,300,300
