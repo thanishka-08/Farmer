@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agricultural Supply Chain System - Output Dashboard</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .tab-btn.active {
+      background-color: var(--primary, #2e7d32);
+      color: var(--primary-foreground, #ffffff);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background,#f4f7f5)] text-[var(--foreground,#1f2937)] p-6 font-sans antialiased min-h-screen">
+  <div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <header class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] rounded-2xl p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-semibold tracking-wider uppercase text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">Live Execution Output</span>
+        </div>
+        <h1 class="text-2xl font-bold text-[var(--foreground,#111827)] mt-1">Agricultural Supply Chain & Farmer Market Linkage</h1>
+        <p class="text-sm text-[var(--muted-foreground,#6b7280)]">Java Swing & OOP mini-project execution output & real-time optimization results</p>
+      </div>
+      <div class="flex gap-2">
+        <a href="file:///c:/Users/thsni/OneDrive/Desktop/Agri_100/output.txt" target="_blank" class="px-4 py-2 text-xs font-medium bg-[var(--accent,#e8f5e9)] text-emerald-800 rounded-lg hover:bg-emerald-100 border border-emerald-200 transition">
+          📄 View Raw output.txt
+        </a>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Registered Farmers</span>
+        <div class="text-2xl font-bold text-emerald-700 mt-1">6</div>
+        <span class="text-[11px] text-emerald-600">F01 to F05 & Village F</span>
+      </div>
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Harvest Lots</span>
+        <div class="text-2xl font-bold text-emerald-700 mt-1">20</div>
+        <span class="text-[11px] text-gray-500">Total 11,000 kg</span>
+      </div>
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Wholesale Markets</span>
+        <div class="text-2xl font-bold text-blue-700 mt-1">3 (9 demands)</div>
+        <span class="text-[11px] text-blue-600">Green, City, Farmers</span>
+      </div>
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Storage Centers</span>
+        <div class="text-2xl font-bold text-amber-700 mt-1">2</div>
+        <span class="text-[11px] text-amber-600">2,500 kg total cap</span>
+      </div>
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Fleet Vehicles</span>
+        <div class="text-2xl font-bold text-purple-700 mt-1">3</div>
+        <span class="text-[11px] text-purple-600">2,500 kg capacity</span>
+      </div>
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] p-4 rounded-xl shadow-sm text-center">
+        <span class="text-xs font-medium text-[var(--muted-foreground,#6b7280)]">Test Suite</span>
+        <div class="text-2xl font-bold text-green-600 mt-1">16 / 16</div>
+        <span class="text-[11px] text-green-600 font-semibold">100% Passed</span>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex gap-2 border-b border-[var(--border,#e5e7eb)] pb-2 overflow-x-auto">
+      <button onclick="switchTab('tab-shipments')" id="btn-tab-shipments" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer">🚚 Dispatched Shipments</button>
+      <button onclick="switchTab('tab-dijkstra')" id="btn-tab-dijkstra" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] text-[var(--foreground,#374151)] hover:bg-gray-100 transition cursor-pointer">🗺️ Dijkstra Routes</button>
+      <button onclick="switchTab('tab-lots')" id="btn-tab-lots" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] text-[var(--foreground,#374151)] hover:bg-gray-100 transition cursor-pointer">🌾 Priority Queue Lots</button>
+      <button onclick="switchTab('tab-facilities')" id="btn-tab-facilities" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] text-[var(--foreground,#374151)] hover:bg-gray-100 transition cursor-pointer">🏪 Markets & Storage</button>
+      <button onclick="switchTab('tab-raw')" id="btn-tab-raw" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] text-[var(--foreground,#374151)] hover:bg-gray-100 transition cursor-pointer">📜 Console Log</button>
+    </div>
+
+    <!-- Tab 1: Dispatched Shipments -->
+    <div id="tab-shipments" class="tab-content bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] rounded-2xl p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-[var(--foreground,#111827)] mb-1">Active Optimized Transport Dispatches</h2>
+      <p class="text-xs text-[var(--muted-foreground,#6b7280)] mb-4">Shipments created by matching highest priority lots (Urgency Level 5 & shortest deadlines) to available vehicles using Dijkstra's shortest transit times.</p>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-[var(--border,#e5e7eb)] text-[var(--muted-foreground,#6b7280)] text-xs uppercase bg-gray-50/50">
+              <th class="py-3 px-4 font-semibold">Shipment ID</th>
+              <th class="py-3 px-4 font-semibold">Lot ID</th>
+              <th class="py-3 px-4 font-semibold">Crop</th>
+              <th class="py-3 px-4 font-semibold">Quantity</th>
+              <th class="py-3 px-4 font-semibold">Destination</th>
+              <th class="py-3 px-4 font-semibold">Vehicle</th>
+              <th class="py-3 px-4 font-semibold">Dijkstra Shortest Path</th>
+              <th class="py-3 px-4 font-semibold">Est. Travel Time</th>
+              <th class="py-3 px-4 font-semibold">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border,#e5e7eb)]">
+            <tr class="hover:bg-emerald-50/40 transition">
+              <td class="py-3 px-4 font-bold text-emerald-800">SHP001</td>
+              <td class="py-3 px-4 font-mono text-xs">LOT04</td>
+              <td class="py-3 px-4 capitalize font-medium">Carrot</td>
+              <td class="py-3 px-4 font-semibold text-emerald-700">300 kg</td>
+              <td class="py-3 px-4">City Market (MARKET2)</td>
+              <td class="py-3 px-4 font-mono text-xs">V01 (500kg)</td>
+              <td class="py-3 px-4"><span class="px-2 py-1 bg-gray-100 rounded text-xs font-mono font-medium text-gray-700">F04 &rarr; J2 &rarr; MARKET2</span></td>
+              <td class="py-3 px-4 font-medium text-amber-700">5.0 hrs</td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">In Transit</span></td>
+            </tr>
+            <tr class="hover:bg-emerald-50/40 transition">
+              <td class="py-3 px-4 font-bold text-emerald-800">SHP002</td>
+              <td class="py-3 px-4 font-mono text-xs">LOT11</td>
+              <td class="py-3 px-4 capitalize font-medium">Tomato</td>
+              <td class="py-3 px-4 font-semibold text-emerald-700">350 kg</td>
+              <td class="py-3 px-4">Green Market (MARKET1)</td>
+              <td class="py-3 px-4 font-mono text-xs">V02 (800kg)</td>
+              <td class="py-3 px-4"><span class="px-2 py-1 bg-gray-100 rounded text-xs font-mono font-medium text-gray-700">F01 &rarr; J1 &rarr; MARKET1</span></td>
+              <td class="py-3 px-4 font-medium text-emerald-700">4.0 hrs</td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">In Transit</span></td>
+            </tr>
+            <tr class="hover:bg-emerald-50/40 transition">
+              <td class="py-3 px-4 font-bold text-emerald-800">SHP003</td>
+              <td class="py-3 px-4 font-mono text-xs">LOT09</td>
+              <td class="py-3 px-4 capitalize font-medium">Carrot</td>
+              <td class="py-3 px-4 font-semibold text-emerald-700">100 kg</td>
+              <td class="py-3 px-4">City Market (MARKET2)</td>
+              <td class="py-3 px-4 font-mono text-xs">V03 (1200kg)</td>
+              <td class="py-3 px-4"><span class="px-2 py-1 bg-gray-100 rounded text-xs font-mono font-medium text-gray-700">F04 &rarr; J2 &rarr; MARKET2</span></td>
+              <td class="py-3 px-4 font-medium text-amber-700">5.0 hrs</td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">In Transit</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 2: Dijkstra Routes -->
+    <div id="tab-dijkstra" class="tab-content hidden bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] rounded-2xl p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-[var(--foreground,#111827)] mb-1">Dijkstra's Shortest Path Routing Calculator</h2>
+      <p class="text-xs text-[var(--muted-foreground,#6b7280)] mb-4">Calculates minimal travel times across the 12-node rural road network (F01-F05, Junctions J1 & J2, Markets 1-3, Stores 1-2).</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
+        <div>
+          <label class="block text-xs font-medium text-emerald-900 mb-1">Origin Node (Farm / Origin)</label>
+          <select id="route-source" onchange="calculateRoute()" class="w-full text-sm bg-white border border-gray-300 rounded-lg p-2 font-medium">
+            <option value="F01">Village A (F01)</option>
+            <option value="F02">Village B (F02)</option>
+            <option value="F03">Village C (F03)</option>
+            <option value="F04">Village D (F04)</option>
+            <option value="F05">Village E (F05)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-emerald-900 mb-1">Destination Facility</label>
+          <select id="route-dest" onchange="calculateRoute()" class="w-full text-sm bg-white border border-gray-300 rounded-lg p-2 font-medium">
+            <option value="MARKET1">Green Market (MARKET1)</option>
+            <option value="MARKET2">City Market (MARKET2)</option>
+            <option value="MARKET3">Farmers Market (MARKET3)</option>
+            <option value="STORE1">Cold Storage Center (STORE1)</option>
+            <option value="STORE2">Dry Storage Center (STORE2)</option>
+          </select>
+        </div>
+        <div class="flex flex-col justify-center">
+          <span class="text-xs font-medium text-emerald-900 mb-1">Calculated Optimal Transit:</span>
+          <div class="flex items-center gap-2">
+            <span id="route-time" class="text-xl font-bold text-emerald-700">4.0 hrs</span>
+            <span id="route-path" class="text-xs font-mono bg-white px-2.5 py-1 rounded border border-emerald-200">F01 &rarr; J1 &rarr; MARKET1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-gray-200 text-gray-500 uppercase bg-gray-50">
+              <th class="py-2.5 px-3">Source Node</th>
+              <th class="py-2.5 px-3">Destination</th>
+              <th class="py-2.5 px-3">Dijkstra Shortest Route</th>
+              <th class="py-2.5 px-3">Total Travel Time</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 font-mono text-gray-700">
+            <tr><td class="p-2.5 font-bold">F01</td><td>MARKET1</td><td class="text-emerald-700">F01 &rarr; J1 &rarr; MARKET1</td><td class="font-bold">4.0 hrs</td></tr>
+            <tr><td class="p-2.5 font-bold">F01</td><td>MARKET2</td><td class="text-emerald-700">F01 &rarr; J1 &rarr; MARKET2</td><td class="font-bold">6.0 hrs</td></tr>
+            <tr><td class="p-2.5 font-bold">F01</td><td>STORE1</td><td class="text-emerald-700">F01 &rarr; J1 &rarr; STORE1</td><td class="font-bold">5.0 hrs</td></tr>
+            <tr><td class="p-2.5 font-bold">F04</td><td>MARKET2</td><td class="text-emerald-700">F04 &rarr; J2 &rarr; MARKET2</td><td class="font-bold">5.0 hrs</td></tr>
+            <tr><td class="p-2.5 font-bold">F04</td><td>STORE2</td><td class="text-emerald-700">F04 &rarr; J2 &rarr; STORE2</td><td class="font-bold">5.0 hrs</td></tr>
+            <tr><td class="p-2.5 font-bold">F05</td><td>MARKET2</td><td class="text-emerald-700">F05 &rarr; J2 &rarr; MARKET2</td><td class="font-bold">4.0 hrs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 3: Priority Queue Lots -->
+    <div id="tab-lots" class="tab-content hidden bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] rounded-2xl p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-[var(--foreground,#111827)] mb-1">PriorityQueue Dynamic Lot Ranking</h2>
+      <p class="text-xs text-[var(--muted-foreground,#6b7280)] mb-4">Ranked automatically: Urgency descending (5 highest &rarr; 1 lowest), then delivery deadline ascending.</p>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-gray-200 text-gray-500 text-xs uppercase bg-gray-50">
+              <th class="py-2.5 px-3">Rank</th>
+              <th class="py-2.5 px-3">Lot ID</th>
+              <th class="py-2.5 px-3">Crop</th>
+              <th class="py-2.5 px-3">Quantity</th>
+              <th class="py-2.5 px-3">Urgency</th>
+              <th class="py-2.5 px-3">Deadline</th>
+              <th class="py-2.5 px-3">Origin Farm</th>
+              <th class="py-2.5 px-3">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-xs">
+            <tr class="bg-red-50/30">
+              <td class="p-3 font-bold text-red-700">#1</td>
+              <td class="p-3 font-mono font-medium">LOT04</td>
+              <td class="p-3 capitalize font-semibold">Carrot</td>
+              <td class="p-3 font-semibold">300 kg</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-red-100 text-red-800 font-bold">Level 5</span></td>
+              <td class="p-3 text-red-700 font-semibold">10 hrs</td>
+              <td class="p-3">F04</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-green-100 text-green-800 font-medium">Allocated</span></td>
+            </tr>
+            <tr class="bg-red-50/30">
+              <td class="p-3 font-bold text-red-700">#2</td>
+              <td class="p-3 font-mono font-medium">LOT11</td>
+              <td class="p-3 capitalize font-semibold">Tomato</td>
+              <td class="p-3 font-semibold">350 kg</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-red-100 text-red-800 font-bold">Level 5</span></td>
+              <td class="p-3 text-red-700 font-semibold">10 hrs</td>
+              <td class="p-3">F01</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-green-100 text-green-800 font-medium">Allocated</span></td>
+            </tr>
+            <tr class="bg-amber-50/30">
+              <td class="p-3 font-bold text-amber-700">#3</td>
+              <td class="p-3 font-mono font-medium">LOT09</td>
+              <td class="p-3 capitalize font-semibold">Carrot</td>
+              <td class="p-3 font-semibold">450 kg</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">Level 4</span></td>
+              <td class="p-3 text-amber-700 font-semibold">12 hrs</td>
+              <td class="p-3">F04</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-medium">Partial</span></td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-gray-500">#4</td>
+              <td class="p-3 font-mono">LOT19</td>
+              <td class="p-3 capitalize">Carrot</td>
+              <td class="p-3">250 kg</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold">Level 4</span></td>
+              <td class="p-3">12 hrs</td>
+              <td class="p-3">F04</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-gray-100 text-gray-700">Pending</span></td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-gray-500">#5</td>
+              <td class="p-3 font-mono">LOT01</td>
+              <td class="p-3 capitalize">Tomato</td>
+              <td class="p-3">500 kg</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold">Level 4</span></td>
+              <td class="p-3">12 hrs</td>
+              <td class="p-3">F01</td>
+              <td class="p-3"><span class="px-2 py-0.5 rounded bg-gray-100 text-gray-700">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 4: Facilities -->
+    <div id="tab-facilities" class="tab-content hidden bg-[var(--card,#ffffff)] border border-[var(--border,#e5e7eb)] rounded-2xl p-6 shadow-sm">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-semibold text-base mb-3 text-emerald-800">🏪 Wholesale Markets</h3>
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl border border-gray-200 bg-gray-50/50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-sm">Green Market (MARKET1)</span>
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">High Demand</span>
+              </div>
+              <p class="text-xs text-gray-600">Demands: Tomato (600kg, 250kg rem), Rice (800kg), Onion (400kg)</p>
+            </div>
+            <div class="p-3 rounded-xl border border-gray-200 bg-gray-50/50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-sm">City Market (MARKET2)</span>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Fulfilled</span>
+              </div>
+              <p class="text-xs text-gray-600">Demands: Carrot (400kg - 0kg rem fulfilled!), Tomato (300kg), Rice (500kg)</p>
+            </div>
+            <div class="p-3 rounded-xl border border-gray-200 bg-gray-50/50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-sm">Farmers Market (MARKET3)</span>
+                <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded">Active</span>
+              </div>
+              <p class="text-xs text-gray-600">Demands: Onion (500kg), Wheat (700kg), Carrot (300kg)</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-3 text-blue-800">🏢 Storage Facilities</h3>
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/30">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-sm text-blue-900">Cold Storage (STORE1)</span>
+                <span class="text-xs font-mono font-semibold text-blue-700">1000 / 1000 kg Avail</span>
+              </div>
+              <p class="text-xs text-gray-600">Compatible Crops: Tomato, Onion, Carrot, Apple, Perishable Vegetables</p>
+            </div>
+            <div class="p-3 rounded-xl border border-amber-200 bg-amber-50/30">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-sm text-amber-900">Dry Storage (STORE2)</span>
+                <span class="text-xs font-mono font-semibold text-amber-700">1500 / 1500 kg Avail</span>
+              </div>
+              <p class="text-xs text-gray-600">Compatible Crops: Rice, Paddy, Wheat, Grain, Corn, Pulses</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5: Raw Output -->
+    <div id="tab-raw" class="tab-content hidden bg-gray-900 text-emerald-400 p-5 rounded-2xl font-mono text-xs overflow-x-auto shadow-inner leading-relaxed">
+      <pre>
+==========================================================================================
+              AGRICULTURAL SUPPLY CHAIN MANAGEMENT & FARMER MARKET LINKAGE                
+                     COMPLETE SYSTEM EXECUTION & OUTPUT REPORT                            
+==========================================================================================
+
+1. SYSTEM OVERVIEW & REGISTERED ENTITIES
+------------------------------------------------------------------------------------------
+  • Total Registered Farmers  : 6
+  • Total Harvest Lots        : 20
+  • Total Pending Harvest Qty : 11,000 kg
+  • Wholesale Markets         : 9
+  • Storage Centers           : 2
+  • Transport Fleet Vehicles  : 3
+
+DISPATCHED SHIPMENTS MANIFEST:
+  ShipID   LotID    Crop       Qty      Destination      Type            Vehicle  Dijkstra Route            Time      
+  --------------------------------------------------------------------------------------------------------------------
+  SHP001   LOT04    carrot     300 kg   City Market      Market          V01      F04 -> J2 -> MARKET2      5.0 hrs   
+  SHP002   LOT11    tomato     350 kg   Green Market     Market          V02      F01 -> J1 -> MARKET1      4.0 hrs   
+  SHP003   LOT09    carrot     100 kg   City Market      Market          V03      F04 -> J2 -> MARKET2      5.0 hrs   
+
+------------------------------------------------------------------------------------------
+TEST RESULTS: 16 / 16 PASSED (100% SUCCESS RATE)
+==========================================================================================
+      </pre>
+    </div>
+
+  </div>
+
+  <script>
+    const routes = {
+      "F01_MARKET1": { time: "4.0 hrs", path: "F01 &rarr; J1 &rarr; MARKET1" },
+      "F01_MARKET2": { time: "6.0 hrs", path: "F01 &rarr; J1 &rarr; MARKET2" },
+      "F01_MARKET3": { time: "7.0 hrs", path: "F01 &rarr; J1 &rarr; J2 &rarr; MARKET3" },
+      "F01_STORE1":  { time: "5.0 hrs", path: "F01 &rarr; J1 &rarr; STORE1" },
+      "F01_STORE2":  { time: "6.0 hrs", path: "F01 &rarr; J1 &rarr; J2 &rarr; STORE2" },
+      "F02_MARKET1": { time: "5.0 hrs", path: "F02 &rarr; J1 &rarr; MARKET1" },
+      "F02_MARKET2": { time: "7.0 hrs", path: "F02 &rarr; J1 &rarr; MARKET2" },
+      "F02_MARKET3": { time: "8.0 hrs", path: "F02 &rarr; J1 &rarr; J2 &rarr; MARKET3" },
+      "F02_STORE1":  { time: "6.0 hrs", path: "F02 &rarr; J1 &rarr; STORE1" },
+      "F02_STORE2":  { time: "7.0 hrs", path: "F02 &rarr; J1 &rarr; J2 &rarr; STORE2" },
+      "F03_MARKET1": { time: "4.0 hrs", path: "F03 &rarr; J1 &rarr; MARKET1" },
+      "F03_MARKET2": { time: "6.0 hrs", path: "F03 &rarr; J1 &rarr; MARKET2" },
+      "F03_MARKET3": { time: "7.0 hrs", path: "F03 &rarr; J1 &rarr; J2 &rarr; MARKET3" },
+      "F03_STORE1":  { time: "5.0 hrs", path: "F03 &rarr; J1 &rarr; STORE1" },
+      "F03_STORE2":  { time: "6.0 hrs", path: "F03 &rarr; J1 &rarr; J2 &rarr; STORE2" },
+      "F04_MARKET1": { time: "7.0 hrs", path: "F04 &rarr; J2 &rarr; J1 &rarr; MARKET1" },
+      "F04_MARKET2": { time: "5.0 hrs", path: "F04 &rarr; J2 &rarr; MARKET2" },
+      "F04_MARKET3": { time: "6.0 hrs", path: "F04 &rarr; J2 &rarr; MARKET3" },
+      "F04_STORE1":  { time: "8.0 hrs", path: "F04 &rarr; J2 &rarr; J1 &rarr; STORE1" },
+      "F04_STORE2":  { time: "5.0 hrs", path: "F04 &rarr; J2 &rarr; STORE2" },
+      "F05_MARKET1": { time: "6.0 hrs", path: "F05 &rarr; J2 &rarr; J1 &rarr; MARKET1" },
+      "F05_MARKET2": { time: "4.0 hrs", path: "F05 &rarr; J2 &rarr; MARKET2" },
+      "F05_MARKET3": { time: "5.0 hrs", path: "F05 &rarr; J2 &rarr; MARKET3" },
+      "F05_STORE1":  { time: "7.0 hrs", path: "F05 &rarr; J2 &rarr; J1 &rarr; STORE1" },
+      "F05_STORE2":  { time: "4.0 hrs", path: "F05 &rarr; J2 &rarr; STORE2" }
+    };
+
+    function calculateRoute() {
+      const src = document.getElementById("route-source").value;
+      const dest = document.getElementById("route-dest").value;
+      const key = `${src}_${dest}`;
+      const res = routes[key] || { time: "Calculating...", path: "Route in analysis" };
+      document.getElementById("route-time").textContent = res.time;
+      document.getElementById("route-path").innerHTML = res.path;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.add('bg-white', 'text-gray-700');
+      });
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('btn-' + tabId);
+      activeBtn.classList.add('active');
+      activeBtn.classList.remove('bg-white', 'text-gray-700');
+    }
+  </script>
+</body>
+</html>

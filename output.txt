@@ -1,0 +1,146 @@
+﻿==========================================================================================
+              AGRICULTURAL SUPPLY CHAIN MANAGEMENT & FARMER MARKET LINKAGE                
+                     COMPLETE SYSTEM EXECUTION & OUTPUT REPORT                            
+==========================================================================================
+
+------------------------------------------------------------------------------------------
+1. SYSTEM OVERVIEW & REGISTERED ENTITIES
+------------------------------------------------------------------------------------------
+  ò Total Registered Farmers  : 6
+  ò Total Harvest Lots        : 20
+  ò Total Pending Harvest Qty : 11,000 kg
+  ò Wholesale Markets         : 9
+  ò Storage Centers           : 2
+  ò Transport Fleet Vehicles  : 3
+
+Registered Farmers:
+  ID       Name                 Phone           Location/Village    
+  -------------------------------------------------------------------
+  F101     Ramesh Patel         9876543211      Village A (F01)     
+  F102     Suresh Kumar         9876543212      Village B (F02)     
+  F103     Ananya Sharma        9876543213      Village C (F03)     
+  F104     Rajesh Reddy         9876543214      Village D (F04)     
+  F105     Meena Devi           9876543215      Village E (F05)     
+  F106     Ramu                 7708945788      VillageF(F01)       
+
+Transport Fleet Status:
+  ID       License Plate      Capacity     Location   Status      
+  -------------------------------------------------------------------
+  V01      KA-01-AB-1001      500 kg       J1         Available   
+  V02      KA-01-AB-1002      800 kg       J1         Available   
+  V03      KA-01-AB-1003      1200 kg      J2         Available   
+
+Wholesale Markets & Crop Demand Requirements:
+  ID         Market Name        Location   Crop         Init Demand    Rem Demand    
+  -----------------------------------------------------------------------------------
+  M01-TOM    Green Market       MARKET1    tomato       600 kg         600 kg        
+  M01-RIC    Green Market       MARKET1    rice         800 kg         800 kg        
+  M01-ONI    Green Market       MARKET1    onion        400 kg         400 kg        
+  M02-TOM    City Market        MARKET2    tomato       300 kg         300 kg        
+  M02-CAR    City Market        MARKET2    carrot       400 kg         400 kg        
+  M02-RIC    City Market        MARKET2    rice         500 kg         500 kg        
+  M03-ONI    Farmers Market     MARKET3    onion        500 kg         500 kg        
+  M03-WHE    Farmers Market     MARKET3    wheat        700 kg         700 kg        
+  M03-CAR    Farmers Market     MARKET3    carrot       300 kg         300 kg        
+
+Storage Centers:
+  ID       Facility Name          Location   Type            Capacity Available Accepted Crops      
+  -----------------------------------------------------------------------------------------------
+  S01      Cold Storage           STORE1     Cold Storage    1000 / 1000 kg     Tomato, Onion, Carrot, Apple, Vegetables
+  S02      Dry Storage            STORE2     Dry Storage     1500 / 1500 kg     Rice, Paddy, Wheat, Grain, Corn, Pulses
+
+------------------------------------------------------------------------------------------
+2. DIJKSTRA'S SHORTEST PATH ALGORITHM: ROUTE & TRAVEL TIME ANALYSIS
+------------------------------------------------------------------------------------------
+  Route F01  -> MARKET1  : Travel Time =  4.0 hrs | Shortest Path: F01 -> J1 -> MARKET1
+  Route F01  -> MARKET2  : Travel Time =  6.0 hrs | Shortest Path: F01 -> J1 -> MARKET2
+  Route F01  -> MARKET3  : Travel Time =  7.0 hrs | Shortest Path: F01 -> J1 -> J2 -> MARKET3
+  Route F01  -> STORE1   : Travel Time =  5.0 hrs | Shortest Path: F01 -> J1 -> STORE1
+  Route F01  -> STORE2   : Travel Time =  6.0 hrs | Shortest Path: F01 -> J1 -> J2 -> STORE2
+  Route F02  -> MARKET1  : Travel Time =  5.0 hrs | Shortest Path: F02 -> J1 -> MARKET1
+  Route F02  -> MARKET2  : Travel Time =  7.0 hrs | Shortest Path: F02 -> J1 -> MARKET2
+  Route F02  -> MARKET3  : Travel Time =  8.0 hrs | Shortest Path: F02 -> J1 -> J2 -> MARKET3
+  Route F02  -> STORE1   : Travel Time =  6.0 hrs | Shortest Path: F02 -> J1 -> STORE1
+  Route F02  -> STORE2   : Travel Time =  7.0 hrs | Shortest Path: F02 -> J1 -> J2 -> STORE2
+  Route F03  -> MARKET1  : Travel Time =  4.0 hrs | Shortest Path: F03 -> J1 -> MARKET1
+  Route F03  -> MARKET2  : Travel Time =  6.0 hrs | Shortest Path: F03 -> J1 -> MARKET2
+  Route F03  -> MARKET3  : Travel Time =  7.0 hrs | Shortest Path: F03 -> J1 -> J2 -> MARKET3
+  Route F03  -> STORE1   : Travel Time =  5.0 hrs | Shortest Path: F03 -> J1 -> STORE1
+  Route F03  -> STORE2   : Travel Time =  6.0 hrs | Shortest Path: F03 -> J1 -> J2 -> STORE2
+  Route F04  -> MARKET1  : Travel Time =  7.0 hrs | Shortest Path: F04 -> J2 -> J1 -> MARKET1
+  Route F04  -> MARKET2  : Travel Time =  5.0 hrs | Shortest Path: F04 -> J2 -> MARKET2
+  Route F04  -> MARKET3  : Travel Time =  6.0 hrs | Shortest Path: F04 -> J2 -> MARKET3
+  Route F04  -> STORE1   : Travel Time =  8.0 hrs | Shortest Path: F04 -> J2 -> J1 -> STORE1
+  Route F04  -> STORE2   : Travel Time =  5.0 hrs | Shortest Path: F04 -> J2 -> STORE2
+  Route F05  -> MARKET1  : Travel Time =  6.0 hrs | Shortest Path: F05 -> J2 -> J1 -> MARKET1
+  Route F05  -> MARKET2  : Travel Time =  4.0 hrs | Shortest Path: F05 -> J2 -> MARKET2
+  Route F05  -> MARKET3  : Travel Time =  5.0 hrs | Shortest Path: F05 -> J2 -> MARKET3
+  Route F05  -> STORE1   : Travel Time =  7.0 hrs | Shortest Path: F05 -> J2 -> J1 -> STORE1
+  Route F05  -> STORE2   : Travel Time =  4.0 hrs | Shortest Path: F05 -> J2 -> STORE2
+
+------------------------------------------------------------------------------------------
+3. PRIORITY QUEUE LOT RANKING (Urgency Descending, Deadline Ascending)
+------------------------------------------------------------------------------------------
+  Rank  Lot ID   Crop         Quantity   Urgency    Deadline   Origin  
+  -------------------------------------------------------------------
+  1     LOT04    carrot       300 kg     Level 5    10 hrs     F04     
+  2     LOT11    tomato       350 kg     Level 5    10 hrs     F01     
+  3     LOT09    carrot       450 kg     Level 4    12 hrs     F04     
+  4     LOT19    carrot       250 kg     Level 4    12 hrs     F04     
+  5     LOT01    tomato       500 kg     Level 4    12 hrs     F01     
+  6     LOT14    carrot       500 kg     Level 4    12 hrs     F04     
+  7     LOT06    tomato       700 kg     Level 4    14 hrs     F01     
+  8     LOT16    tomato       450 kg     Level 4    15 hrs     F01     
+  9     LOT03    onion        400 kg     Level 4    15 hrs     F03     
+  10    LOT08    onion        500 kg     Level 3    16 hrs     F03     
+  11    LOT13    onion        250 kg     Level 3    18 hrs     F03     
+  12    LOT18    onion        600 kg     Level 3    20 hrs     F03     
+  13    LOT17    rice         400 kg     Level 2    36 hrs     F02     
+  14    LOT12    rice         750 kg     Level 2    36 hrs     F02     
+  15    LOT15    wheat        600 kg     Level 1    48 hrs     F05     
+  16    LOT05    wheat        900 kg     Level 1    48 hrs     F05     
+  17    LOT20    wheat        800 kg     Level 1    48 hrs     F05     
+  18    LOT10    wheat        500 kg     Level 1    48 hrs     F05     
+  19    LOT02    rice         1200 kg    Level 1    48 hrs     F02     
+  20    LOT07    rice         600 kg     Level 1    48 hrs     F02     
+
+------------------------------------------------------------------------------------------
+4. SUPPLY CHAIN OPTIMIZATION & DISPATCH EXECUTION
+------------------------------------------------------------------------------------------
+  ò Harvest Lots Examined    : 20
+  ò New Shipments Created    : 3
+  ò Total Quantity Allocated : 750 kg
+  ò Remaining Unallocated    : 10,250 kg
+
+DISPATCHED SHIPMENTS MANIFEST:
+  ShipID   LotID    Crop       Qty      Destination      Type            Vehicle  Dijkstra Route            Time      
+  --------------------------------------------------------------------------------------------------------------------
+  SHP001   LOT04    carrot     300 kg   City Market      Market          V01      F04 -> J2 -> MARKET2      5.0 hrs   
+  SHP002   LOT11    tomato     350 kg   Green Market     Market          V02      F01 -> J1 -> MARKET1      4.0 hrs   
+  SHP003   LOT09    carrot     100 kg   City Market      Market          V03      F04 -> J2 -> MARKET2      5.0 hrs   
+
+UNALLOCATED LOT AUDIT LOG (Resource Bottleneck Notes):
+  [NOTE] Lot LOT09 (carrot, 350 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT19 (carrot, 250 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT01 (tomato, 500 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT14 (carrot, 500 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT06 (tomato, 700 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT16 (tomato, 450 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT03 (onion, 400 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  [NOTE] Lot LOT08 (onion, 500 kg remaining): No available vehicles (all vehicles are in transit or assigned).
+  ... and 10 more pending lots awaiting subsequent vehicle availability.
+
+------------------------------------------------------------------------------------------
+5. UPDATED SYSTEM METRICS & KPI STATUS
+------------------------------------------------------------------------------------------
+  ò Total Farmers            : 6
+  ò Total Harvest Lots       : 20
+  ò Pending Harvest Qty      : 10,250 kg
+  ò Remaining Market Demand  : 3,750 kg
+  ò Available Storage Space  : 2,500 kg
+  ò Available Vehicles       : 0
+  ò Total Active Shipments   : 3
+
+==========================================================================================
+                   DEMONSTRATION RUN COMPLETE - DATA SAVED SUCCESSFULLY                   
+==========================================================================================
